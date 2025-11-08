@@ -1,5 +1,6 @@
 import React from 'react'
 import ProductCard from '../ui/ProductCard'
+import useGetAxios from '../../hooks/useGetAxios'
 
 const MOCK_PRODUCTS = [
   {
@@ -38,6 +39,9 @@ const MOCK_PRODUCTS = [
 ]
 
 const HomeView = () => {
+  //los custom Hook tienen que usarse dentro de un componente
+  const { data, error } = useGetAxios(`https://simple-api-2ivd.onrender.com/productos`)
+
   return (
     <div className="max-w-7xl mx-auto px-3 md:px-6 py-6">
       <div className="hero bg-base-200 rounded-box">
