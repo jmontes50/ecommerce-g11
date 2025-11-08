@@ -11,9 +11,12 @@ const useGetAxios = (url) => {
     const requestData = async () => {
       try {
         const response = await axios.get(url);
-        console.log(response)
+        // console.log(response)
+        setData(response.data);
+        setError(false);
       } catch (error) {
-        console.log(error)
+        console.log(error);
+        setError(error);
       }
     }
     requestData();

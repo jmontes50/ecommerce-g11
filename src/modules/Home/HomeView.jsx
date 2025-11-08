@@ -42,6 +42,8 @@ const HomeView = () => {
   //los custom Hook tienen que usarse dentro de un componente
   const { data, error } = useGetAxios(`https://simple-api-2ivd.onrender.com/productos`)
 
+  console.log(data)
+
   return (
     <div className="max-w-7xl mx-auto px-3 md:px-6 py-6">
       <div className="hero bg-base-200 rounded-box">
@@ -59,7 +61,10 @@ const HomeView = () => {
 
       <h2 className="mt-8 mb-4 text-xl font-semibold">Destacados</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-        {MOCK_PRODUCTS.map((p) => (
+        {/* operador de encadenamiento opcional */}
+        {/* validamos que la propiedad productos exista, recodermos que data originalmente es null */}
+        {/* aplicamos un renderizado de listas para mostrar los productos de la API */}
+        {data?.productos && data.productos.map((p) => (
           <ProductCard key={p.id} producto={p} />
         ))}
       </div>
