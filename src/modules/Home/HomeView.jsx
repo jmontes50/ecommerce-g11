@@ -45,7 +45,21 @@ const HomeView = () => {
   //los custom Hook tienen que usarse dentro de un componente
   const { data, error } = useGetAxios(`https://simple-api-2ivd.onrender.com/productos?page=${page}&limit=9`);
 
-  console.log(data)
+  console.log(data);
+  //buscamos en la respuesta de la api totalPages
+  const totalPages = data?.meta?.totalPages;
+
+  const previousPage = () => {
+    if(page > 1) { //previniendo que sea un 1 - 1
+      setPage(page - 1)
+    }
+  }
+
+  const nextPage = () => {
+    if(page < totalPages){ //si es menor a totalPages aumentamos + 1
+      setPage(page + 1);
+    }
+  }
 
   return (
     <div className="max-w-7xl mx-auto px-3 md:px-6 py-6">
@@ -73,10 +87,12 @@ const HomeView = () => {
       </div>
       {/* botones paginación */}
       <div className='flex justify-between mt-6'>
-        <button className='btn btn-primary'>
+        <button
+        className='btn btn-primary' onClick={previousPage}>
           Página Previa
         </button>
-        <button className='btn btn-primary'>
+        <button
+        className='btn btn-primary' onClick={nextPage}>
           Página Siguiente
         </button>
       </div>
