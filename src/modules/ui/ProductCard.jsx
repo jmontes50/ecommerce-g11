@@ -1,5 +1,4 @@
-import React from 'react'
-
+import useCartStore from "../../store/useCartStore"
 // Producto model reference:
 // {
 //   id: number,
@@ -14,7 +13,14 @@ import React from 'react'
 // }
 
 const ProductCard = ({ producto }) => {
-  const { nombre, descripcion, precio, imagen, stock } = producto
+  const { nombre, descripcion, precio, imagen, stock } = producto;
+
+  const { cart, addProduct } = useCartStore();
+  console.log({ cart });
+
+  const handleAddProduct = () => {
+    addProduct(producto)
+  }
 
   return (
     <div className="card bg-base-100 shadow-sm hover:shadow-md transition-shadow">
@@ -42,7 +48,13 @@ const ProductCard = ({ producto }) => {
         </div>
         <div className="card-actions pt-2">
           {/* Botón deshabilitado si no hay stock (condicional booleana simple) */}
-          <button className="btn btn-primary btn-block" disabled={stock <= 0}>Agregar</button>
+          <button
+            className="btn btn-primary btn-block"
+            disabled={stock <= 0}
+            onClick={handleAddProduct}
+          >
+            Agregar
+          </button>
         </div>
       </div>
     </div>

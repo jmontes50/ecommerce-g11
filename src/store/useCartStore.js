@@ -5,7 +5,9 @@ const useCartStore = create((set) => ({
   addProduct: (product) => {
     set((state) => {
       console.log(state);
-      return [...state.cart, product]
+      return {
+        cart: [...state.cart, product]
+      }
     })
   }
 }))
