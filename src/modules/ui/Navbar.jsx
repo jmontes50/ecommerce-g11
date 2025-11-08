@@ -1,4 +1,4 @@
-import React from 'react'
+import useCartStore from '../../store/useCartStore';
 import { Link } from 'react-router-dom'
 
 // Navbar responsivo usando DaisyUI
@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom'
 // - Desktop (>= lg): muestra el menú horizontal centrado
 // - Lado derecho: avatar de usuario con dropdown de opciones
 const Navbar = () => {
+  const { cart } = useCartStore();
+
   return (
     <div className="navbar bg-base-100 border-b">
       {/* Sección izquierda: logo + menú móvil */}
@@ -33,7 +35,12 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">
           {/* Enlaza a rutas simples, actualmente estático */}
           <li><Link to="/">Inicio</Link></li>
-          <li><a>Productos</a></li>
+          <li className='indicator'>
+            <a>Productos</a>
+            <span className='indicator-item badge badge-xs badge-primary'>
+              {cart.length}
+            </span>
+          </li>
           <li><a>Contacto</a></li>
         </ul>
       </div>
