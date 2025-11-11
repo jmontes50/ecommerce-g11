@@ -1,4 +1,5 @@
 import useCartStore from "../../store/useCartStore"
+import { toast } from "react-toastify";
 // Producto model reference:
 // {
 //   id: number,
@@ -19,7 +20,12 @@ const ProductCard = ({ producto }) => {
   console.log({ cart });
 
   const handleAddProduct = () => {
-    addProduct(producto)
+    addProduct(producto);
+    toast(`${nombre} se añadio al carrito!`, {
+      theme:"dark",
+      type:"success"
+    });
+
   }
 
   return (
