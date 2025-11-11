@@ -15,6 +15,7 @@ const useAuthStore = create((set) => ({
     try {
       const response = await axios.post("https://simple-api-2ivd.onrender.com/auth/register", userInfo);
       if(response.status === 201){
+        console.log(response)
         toast.success("Usuario registrado!!");
         return true; //no estamos usando set, porque el registro
       } else {
