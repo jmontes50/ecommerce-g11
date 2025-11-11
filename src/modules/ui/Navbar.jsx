@@ -25,9 +25,14 @@ const Navbar = () => {
           {/* Items del menú en mobile (dropdown) */}
           <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
             <li><Link to="/">Inicio</Link></li>
-            <li><a>Productos</a></li>
-            <li><a>Ofertas</a></li>
-            <li><a>Contacto</a></li>
+            <li className='indicator'>
+              <Link to="/cart">Carrito</Link>
+              <span className='indicator-item badge badge-xs badge-primary'>
+                {totalCart}
+              </span>
+            </li>
+            <li><Link to="/register">Registrate</Link></li>
+            <li><Link to="/login">Ingresa</Link></li>
           </ul>
         </div>
         {/* Marca/Logo que navega al home */}
@@ -40,7 +45,7 @@ const Navbar = () => {
           {/* Enlaza a rutas simples, actualmente estático */}
           <li><Link to="/">Inicio</Link></li>
           <li className='indicator'>
-            <a>Productos</a>
+            <Link to="/cart">Carrito</Link>
             <span className='indicator-item badge badge-xs badge-primary'>
               {totalCart}
             </span>
