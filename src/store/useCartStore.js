@@ -1,14 +1,16 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import { saveStorage, getStorage } from "../utils/localStorageUtils";
+import { saveStorage, getStorage, removeStorage } from "../utils/localStorageUtils";
 
 const KEY_STORAGE = "cart";
+const KEY_USER_ID = "cart_user_id";
 
 //para usar las devtools de zustand con la extension de redux tenemos que envolver la func callback del create
 // const useCartStore = create((set) => ({ // sin devtools
 const useCartStore = create(devtools((set) => ({
   //buscamos si hay algo en el LS, si no es un array vacio
   cart: getStorage(KEY_STORAGE) || [],
+  userId: null,
   //la idea de usar devtools s poder ver c/cambio de forma granular
   //para eso modificaremos cada función...
   addProduct: (product) => {
@@ -34,6 +36,19 @@ const useCartStore = create(devtools((set) => ({
       }
       //... la modificación es agregar unos argumentos extra dandolé un nombre a cada función
     }, false, "cart/addProductToCart")
+  },
+  setUserId: (id) => {
+    set({ userId: id }, false, "cart/setUserId");
+    const currentUserId = Number(getStorage(KEY_USER_ID));
+    // console.log({ id, currentUserId });
+    if(id !== currentUserId){
+      useCartStore.getState().resetCart();
+    }
+    saveStorage(KEY_USER_ID, id);
+  },
+  resetCart: () => {
+    removeStorage(KEY_STORAGE);
+    set({ cart: [] })
   }
 })))
 

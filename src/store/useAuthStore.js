@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { saveStorage, getStorage, removeStorage } from "../utils/localStorageUtils";
 import axios from "axios";
 import { toast } from "react-toastify";
+import useCartStore from "./useCartStore";
 
 const KEY_AUTH = "auth_store";
 
@@ -34,8 +35,11 @@ const useAuthStore = create((set) => ({
       console.log(response)
       if(response.status === 200) {
         const { token, usuario } = response.data;
+        useCartStore.getState().setUserId(usuario.id);
         //guardar en el LS
         saveStorage(KEY_AUTH, { token: token, user: usuario, isLogged: true});
+        console.log({ usuario })
+
         toast.success("Bienvenido!");
         //aquí no necesitamos acceder la información del state, así que podemos invocar directamente a set y darle en un objeto cuál es el cambio en el estado
         set({ user: usuario, token: token, isLogged: true })
