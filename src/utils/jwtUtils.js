@@ -11,7 +11,10 @@ const isTokenExpired = (token) => {
     // obtenemos el timestamp de ahora y lo dividimos entre 1000
     const now = new Date() / 1000;
     // comparamos el ahora vs la fecha del .exp
-    const isValid = now >= payload.exp;
+    const isValid = now <= payload.exp;
+    console.log({ now })
+    console.log({ exp:  payload.exp })
+    console.log({isValid})
     return !isValid;
   } catch (error) {
     return true;

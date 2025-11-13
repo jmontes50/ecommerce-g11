@@ -7,7 +7,6 @@ const ProtectedRoute = (props) => {
 
   // console.log("Desde ProtectedRoute:", isLogged)
   const authenticated = isLogged && !isTokenExpired(token);
-
   return (
     <>
       { authenticated ? props.children : <Navigate to="/login" />}
@@ -15,4 +14,4 @@ const ProtectedRoute = (props) => {
   )
 }
 
-export default ProtectedRoute
+export default ProtectedRoute;
