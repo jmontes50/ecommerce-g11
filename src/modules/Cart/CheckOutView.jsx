@@ -1,5 +1,6 @@
 import useCartStore from "../../store/useCartStore";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 const CheckOutView = () => {
   const { cart } = useCartStore();
@@ -16,7 +17,8 @@ const CheckOutView = () => {
     }, 0).toFixed(2);
 
   const onSubmit = (data) => {
-    console.log(data);
+    console.log(data); //peticion, POST
+    toast.success("Carrito Confirmado!");
   }
 
   return (
@@ -61,6 +63,7 @@ const CheckOutView = () => {
         </div>
         <div className="col-span-1 md:col-span-5">
           <h3 className="font-semibold text-lg">Formulario</h3>
+          {/* el handleSubmit de react-hook-forms requiere recibir una función para manejar el evento */}
           <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-3 flex flex-col gap-2">
               <label className="text-sm text-gray-300">Nombres y Apellidos</label>
