@@ -61,10 +61,20 @@ const CheckOutView = () => {
         </div>
         <div className="col-span-1 md:col-span-5">
           <h3 className="font-semibold text-lg">Formulario</h3>
-          <form className="mt-4">
+          <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-3 flex flex-col gap-2">
               <label className="text-sm text-gray-300">Nombres y Apellidos</label>
-              <input type="text" placeholder="Juan Perez" className="input w-full" />
+              {/* Para que podamos utilizar react-hook-forms en cada Input tenemos que "registrarlo" con el attr register */}
+              <input
+                type="text"
+                placeholder="Juan Perez"
+                className="input w-full"
+                // register(nombreRegistro, { validaciones })
+                {...register("fullname", {
+                  required: "Este campo es obligatorio"
+                })}
+              />
+              {errors && (<p className="text-xs text-red-600">{errors?.fullname?.message}</p>)}
             </div>
             <div className="mb-3 flex flex-col gap-2">
               <label className="text-sm text-gray-300">Dirección</label>
