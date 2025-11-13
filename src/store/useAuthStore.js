@@ -32,13 +32,13 @@ const useAuthStore = create((set) => ({
   loginUser: async (email, password) => {
     try {
       const response = await axios.post("https://simple-api-2ivd.onrender.com/auth/login", { email, password });
-      console.log(response)
+      // console.log(response)
       if(response.status === 200) {
         const { token, usuario } = response.data;
         useCartStore.getState().setUserId(usuario.id);
         //guardar en el LS
         saveStorage(KEY_AUTH, { token: token, user: usuario, isLogged: true});
-        console.log({ usuario })
+        // console.log({ usuario })
 
         toast.success("Bienvenido!");
         //aquí no necesitamos acceder la información del state, así que podemos invocar directamente a set y darle en un objeto cuál es el cambio en el estado
