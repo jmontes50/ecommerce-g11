@@ -1,11 +1,23 @@
 import useCartStore from "../../store/useCartStore";
+import { useForm } from "react-hook-form";
 
 const CheckOutView = () => {
   const { cart } = useCartStore();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm()
+
   const totalCart = cart
     .reduce((acum, item) => {
       return acum + item.cantidad * item.precio;
     }, 0).toFixed(2);
+
+  const onSubmit = (data) => {
+    console.log(data);
+  }
 
   return (
     <div className='max-w-7xl mx-auto px-3 md:px-6 py-6"'>
