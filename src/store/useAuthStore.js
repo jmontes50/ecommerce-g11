@@ -31,7 +31,9 @@ const useAuthStore = create((set) => ({
   },
   loginUser: async (email, password) => {
     try {
-      const response = await axios.post("https://simple-api-2ivd.onrender.com/auth/login", { email, password });
+      // const URI = "https://simple-api-2ivd.onrender.com/auth/login";
+      const URI = import.meta.env.VITE_API_URI;
+      const response = await axios.post(URI, { email, password });
       // console.log(response)
       if(response.status === 200) {
         const { token, usuario } = response.data;
